@@ -4,21 +4,24 @@ import 'package:bookia/Components/inputs/custom_text_field.dart';
 import 'package:bookia/core/Utils/colors.dart';
 import 'package:bookia/core/Utils/text_styles.dart';
 import 'package:bookia/core/constants/app_images.dart';
-import 'package:bookia/features/auth/presentation/login/widgets/social_login.dart';
+import 'package:bookia/core/routes/navigation.dart';
+import 'package:bookia/core/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
+  var nameController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var confirmpasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,11 +30,13 @@ class _LoginScreenState extends State<LoginScreen> {
       bottomNavigationBar: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Don\'t have an Account?"),
+          Text("Already have an Account?"),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              pushwithReplacement(context, Routes.login);
+            },
             child: Text(
-              "Sign Up",
+              "Sign In",
               style: TextStyles.styleSize16(color: AppColor.primaryColor),
             ),
           ),
@@ -46,12 +51,14 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Column(
         children: [
           Text(
-            "Welcome back! Glad to see you, Again!",
+            "Hello! Register to get started",
             style: TextStyles.styleSize30(),
           ),
           Gap(30),
+          CustomTextField(controller: nameController, hint: "UseName"),
+          Gap(12),
           CustomTextField(controller: emailController, hint: 'Email'),
-          Gap(20),
+          Gap(12),
           CustomTextField(
             controller: passwordController,
             hint: "Password",
@@ -61,25 +68,20 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [SvgPicture.asset(AppImages.eye)],
             ),
           ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-              style: TextButton.styleFrom(overlayColor: Colors.transparent),
-              onPressed: () {},
-              child: Text(
-                "Forgot Password?",
-                style: TextStyles.styleSize16(color: AppColor.primaryColor),
-              ),
+          Gap(12),
+          CustomTextField(
+            controller: confirmpasswordController,
+            hint: "ConfirmPassword",
+            suffixIcon: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisSize: MainAxisSize.min,
+              children: [SvgPicture.asset(AppImages.eye)],
             ),
           ),
+
           Gap(30),
-          MainButton(text: "Login", onPressed: () {}),
+          MainButton(text: "Resgister", onPressed: () {}),
           Gap(34),
-          Text("or", style: TextStyles.styleSize18(color: AppColor.greyColor)),
-          Gap(24),
-          SocialButton(image: AppImages.google, txtbt: "Sign in with google"),
-          Gap(48),
-          SocialButton(image: AppImages.apple, txtbt: "Sign in with Apple"),
         ],
       ),
     );

@@ -25,6 +25,7 @@ class AppTheme{
         color: AppColor.greyColor,
       ),
     ),
+    dividerTheme: DividerThemeData(color: AppColor.borderColor)
   );
 
     
