@@ -1,4 +1,4 @@
-import 'package:bookia/Core/Utils/colors.dart';
+import 'package:bookia/core/Utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class TextStyles {

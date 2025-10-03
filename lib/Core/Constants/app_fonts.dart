@@ -1,3 +1,3 @@
 class AppFonts {
-  static const String poppinsfamily = 'Poppins';
+  static const String dmserif = 'DMSerifDisplay';
 }

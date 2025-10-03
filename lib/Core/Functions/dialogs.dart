@@ -1,11 +1,11 @@
-import 'package:bookia/Core/Utils/text_styles.dart';
+import 'package:bookia/core/Utils/text_styles.dart';
 import 'package:flutter/material.dart';
 
 ShowErrorDialog(BuildContext context, String message) {
   ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(message,
-                    style: TextStyles.styleSize14(),),
+                    style: TextStyles.styleSize16(),),
                     backgroundColor: Colors.red,
                     behavior: SnackBarBehavior.floating,
                     margin: EdgeInsets.all(20),

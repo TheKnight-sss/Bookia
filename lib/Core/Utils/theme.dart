@@ -1,13 +1,13 @@
-import 'package:bookia/Core/Constants/app_fonts.dart';
-import 'package:bookia/Core/Utils/colors.dart';
-import 'package:bookia/Core/Utils/text_styles.dart';
+import 'package:bookia/core/Utils/colors.dart';
+import 'package:bookia/core/Utils/text_styles.dart';
+import 'package:bookia/core/constants/app_fonts.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme{
   static ThemeData get lightTheme => ThemeData(
     scaffoldBackgroundColor: AppColor.whiteColor,
     primaryColor: AppColor.primaryColor,
-    fontFamily: AppFonts.poppinsfamily,
+    fontFamily: AppFonts.dmserif,
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColor.whiteColor,
       surfaceTintColor: Colors.transparent,
@@ -16,6 +16,11 @@ class AppTheme{
     colorScheme: ColorScheme.fromSeed(seedColor: AppColor.primaryColor,
     onSurface: AppColor.darkColor),
     inputDecorationTheme: InputDecorationTheme(
+      fillColor: AppColor.accentColor,
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: AppColor.borderColor)
+      ),
+      filled: true,
       hintStyle: TextStyles.styleSize14(
         color: AppColor.greyColor,
       ),
