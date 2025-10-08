@@ -13,15 +13,15 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  @override
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 3), () {
+      pushwithReplacement(context, Routes.welcome);
+    });
+    super.initState();
+  }
 
-@override
-@override
-void initState() {
-  Future.delayed(const Duration(seconds: 3),(){
-    pushwithReplacement(context, Routes.welcome);
-  });
-  super.initState();
-}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,14 +29,8 @@ void initState() {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(
-              AppImages.logosvg,
-              height: 100,
-            ),
-            Text(
-              'Order Your Book Now!',
-              style: TextStyles.styleSize18(),
-            ),
+            SvgPicture.asset(AppImages.logosvg, height: 100),
+            Text('Order Your Book Now!', style: TextStyles.styleSize18()),
           ],
         ),
       ),

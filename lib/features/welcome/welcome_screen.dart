@@ -33,9 +33,12 @@ class WelcomeScreen extends StatelessWidget {
                 Text("Order Your Book Now!", style: TextStyles.styleSize18()),
                 Spacer(flex: 3),
 
-                MainButton(text: "Login", onPressed: () {
-                  pushTo(context, Routes.login);
-                }),
+                MainButton(
+                  text: "Login",
+                  onPressed: () {
+                    pushTo(context, Routes.login);
+                  },
+                ),
                 Gap(10),
                 MainButton(
                   text: "Sign Up",

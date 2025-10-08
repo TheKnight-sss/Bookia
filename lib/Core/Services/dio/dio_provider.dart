@@ -1,20 +1,21 @@
+import 'package:bookia/core/Services/dio/api_endpoint.dart';
 import 'package:dio/dio.dart';
 
 class DioProvider {
   static late Dio dio;
 
   static init() {
-    dio = Dio();
+    dio = Dio(BaseOptions(baseUrl: ApiEndPoint.baseUrl,connectTimeout: Duration(seconds: 2)));
   }
 
   static Future<Response> post({
-    required String path,
+    required String endpoint,
     Object? data,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) async {
     return await dio.post(
-      path,
+      endpoint,
       data: data,
       queryParameters: queryParameters,
       options: Options(headers: headers),
@@ -22,13 +23,13 @@ class DioProvider {
   }
 
   static Future<Response> get({
-    required String path,
+    required String endpoint,
     Object? data,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) async {
     return await dio.get(
-      path,
+      endpoint,
       data: data,
       queryParameters: queryParameters,
       options: Options(headers: headers),
@@ -36,13 +37,13 @@ class DioProvider {
   }
 
   static Future<Response> put({
-    required String path,
+    required String endpoint,
     Object? data,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) async {
     return await dio.put(
-      path,
+      endpoint,
       data: data,
       queryParameters: queryParameters,
       options: Options(headers: headers),
@@ -50,13 +51,13 @@ class DioProvider {
   }
 
   static Future<Response> delete({
-    required String path,
+    required String endpoint,
     Object? data,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) async {
     return await dio.delete(
-      path,
+      endpoint,
       data: data,
       queryParameters: queryParameters,
       options: Options(headers: headers),
@@ -64,13 +65,13 @@ class DioProvider {
   }
 
   static Future<Response> patch({
-    required String path,
+    required String endpoint,
     Object? data,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) async {
     return await dio.patch(
-      path,
+      endpoint,
       data: data,
       queryParameters: queryParameters,
       options: Options(headers: headers),

@@ -8,7 +8,10 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.controller,
     this.maxLines,
-    this.minLines, this.suffixIcon, this.readOnly, this.onTap,
+    this.minLines,
+    this.suffixIcon,
+    this.readOnly,
+    this.onTap,
   });
 
   final String? hint;
@@ -28,12 +31,9 @@ class CustomTextField extends StatelessWidget {
       validator: validator,
       readOnly: readOnly ?? false,
       onTap: onTap,
-      decoration: InputDecoration(hintText: hint,
-      suffixIcon: suffixIcon
-      ),
+      decoration: InputDecoration(hintText: hint, suffixIcon: suffixIcon),
       minLines: minLines,
-      maxLines: maxLines ,
-      
+      maxLines: maxLines,
     );
   }
 }

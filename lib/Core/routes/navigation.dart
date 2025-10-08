@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-pushTo(BuildContext context,String route){
+pushTo(BuildContext context, String route) {
   context.push(route);
 }
 
-pushwithReplacement(BuildContext context,String route){
+pushwithReplacement(BuildContext context, String route) {
   context.pushReplacement(route);
 }
 
-pushAndRemoveUntil(BuildContext context,String route){
+pushAndRemoveUntil(BuildContext context, String route) {
   context.go(route);
 }
 
-pop(BuildContext context){
+pop(BuildContext context) {
   context.pop();
 }

@@ -1,6 +1,7 @@
 class AppImages {
   static const String logosvg = 'assets/images/logo.svg';
-  static const String welcome = 'assets/images/alif-caesar-rizqi-pratama-loUlSOXL81c-unsplash 1.png';
+  static const String welcome =
+      'assets/images/alif-caesar-rizqi-pratama-loUlSOXL81c-unsplash 1.png';
   static const String success = 'assets/images/Successmark.svg';
   static const String apple = 'assets/images/cib_apple.svg';
   static const String google = 'assets/images/google_ic.svg';

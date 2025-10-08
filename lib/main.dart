@@ -7,8 +7,11 @@ import 'package:flutter/material.dart';
 
 
 void main() {
-  DioProvider.init;
-  runApp(DevicePreview( enabled: kDebugMode, builder: (context) => const MainApp(),));
+  WidgetsFlutterBinding.ensureInitialized();
+  DioProvider.init();
+  runApp(
+    DevicePreview(enabled: kDebugMode, builder: (context) => const MainApp()),
+  );
 }
 
 class MainApp extends StatelessWidget {

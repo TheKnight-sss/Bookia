@@ -5,26 +5,20 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 class SocialButton extends StatelessWidget {
-  const SocialButton({
-    super.key, required this.image, required this.txtbt,
-  });
+  const SocialButton({super.key, required this.image, required this.txtbt});
   final String image;
   final String txtbt;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-      },
+      onTap: () {},
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(image),
           Gap(10),
-          Text(
-            txtbt,
-            style: TextStyles.styleSize18(color: AppColor.greyColor),
-          ),
+          Text(txtbt, style: TextStyles.styleSize18(color: AppColor.greyColor)),
         ],
       ),
     );

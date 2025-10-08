@@ -3,7 +3,7 @@ import 'package:bookia/core/Utils/text_styles.dart';
 import 'package:bookia/core/constants/app_fonts.dart';
 import 'package:flutter/material.dart';
 
-class AppTheme{
+class AppTheme {
   static ThemeData get lightTheme => ThemeData(
     scaffoldBackgroundColor: AppColor.whiteColor,
     primaryColor: AppColor.primaryColor,
@@ -13,20 +13,18 @@ class AppTheme{
       surfaceTintColor: Colors.transparent,
       centerTitle: true,
     ),
-    colorScheme: ColorScheme.fromSeed(seedColor: AppColor.primaryColor,
-    onSurface: AppColor.darkColor),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: AppColor.primaryColor,
+      onSurface: AppColor.darkColor,
+    ),
     inputDecorationTheme: InputDecorationTheme(
       fillColor: AppColor.accentColor,
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: AppColor.borderColor)
+        borderSide: BorderSide(color: AppColor.borderColor),
       ),
       filled: true,
-      hintStyle: TextStyles.styleSize14(
-        color: AppColor.greyColor,
-      ),
+      hintStyle: TextStyles.styleSize14(color: AppColor.greyColor),
     ),
-    dividerTheme: DividerThemeData(color: AppColor.borderColor)
+    dividerTheme: DividerThemeData(color: AppColor.borderColor),
   );
-
-    
 }

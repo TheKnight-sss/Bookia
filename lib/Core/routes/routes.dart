@@ -1,7 +1,9 @@
+import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/features/auth/presentation/login/page/login_screen.dart';
 import 'package:bookia/features/auth/presentation/register/page/register_screen.dart';
 import 'package:bookia/features/splash/splash_screen.dart';
 import 'package:bookia/features/welcome/welcome_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class Routes {
@@ -17,12 +19,14 @@ class Routes {
         path: welcome,
         builder: (context, state) => const WelcomeScreen(),
       ),
+      GoRoute(path: login, builder: (context, state) => const LoginScreen()),
       GoRoute(
-        path: login,
-        builder: (context, state) => const LoginScreen(),
+        path: register,
+        builder: (context, state) => BlocProvider(
+          create: (context) => AuthCubit(),
+          child: const RegisterScreen(),
+        ),
       ),
-      GoRoute(path: register,
-      builder: (context, state) => const RegisterScreen(),)
     ],
   );
 }

@@ -36,7 +36,10 @@ class MainButton extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
         onPressed: onPressed,
-        child: Text(text, style: TextStyles.styleSize20(color: textColor ?? Colors.white)),
+        child: Text(
+          text,
+          style: TextStyles.styleSize20(color: textColor ?? Colors.white),
+        ),
       ),
     );
   }
