@@ -13,6 +13,11 @@ class AppTheme {
       surfaceTintColor: Colors.transparent,
       centerTitle: true,
     ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      type: BottomNavigationBarType.fixed,
+    ),
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColor.primaryColor,
       onSurface: AppColor.darkColor,

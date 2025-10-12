@@ -5,7 +5,12 @@ class DioProvider {
   static late Dio dio;
 
   static init() {
-    dio = Dio(BaseOptions(baseUrl: ApiEndPoint.baseUrl,connectTimeout: Duration(seconds: 2)));
+    dio = Dio(
+      BaseOptions(
+        baseUrl: ApiEndPoint.baseUrl,
+        connectTimeout: Duration(seconds: 2),
+      ),
+    );
   }
 
   static Future<Response> post({

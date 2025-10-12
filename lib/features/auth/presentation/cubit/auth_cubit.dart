@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit(): super(AuthInitialState());
+  AuthCubit() : super(AuthInitialState());
 
   var formkey = GlobalKey<FormState>();
   var nameController = TextEditingController();
@@ -13,24 +13,22 @@ class AuthCubit extends Cubit<AuthState> {
   var passwordController = TextEditingController();
   var confirmpasswordController = TextEditingController();
 
-
-  register()async{
+  register() async {
     emit(AuthLoadingState());
 
     var params = AuthParams(
       name: nameController.text,
       email: emailController.text,
       password: passwordController.text,
-       passwordConfirmation: confirmpasswordController.text
+      passwordConfirmation: confirmpasswordController.text,
     );
 
     var response = await AuthRepo.register(params);
 
     if (response != null) {
-      emit(AuthSuccessState());    
-    }else{
+      emit(AuthSuccessState());
+    } else {
       emit(AuthErrorState());
     }
   }
-  
 }

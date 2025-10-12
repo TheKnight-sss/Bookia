@@ -2,9 +2,9 @@ import 'dart:developer';
 import 'package:bookia/Components/app_bar_with_back.dart';
 import 'package:bookia/Components/buttons/main_button.dart';
 import 'package:bookia/Components/inputs/custom_text_field.dart';
+import 'package:bookia/Components/inputs/password_text_field.dart';
 import 'package:bookia/core/Utils/colors.dart';
 import 'package:bookia/core/Utils/text_styles.dart';
-import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/dialogs.dart';
 import 'package:bookia/core/routes/navigation.dart';
 import 'package:bookia/core/routes/routes.dart';
@@ -12,7 +12,6 @@ import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -22,7 +21,7 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWithBack(),
-      body: _buildLoginBody(context),
+      body: SingleChildScrollView(child: _buildLoginBody(context)),
       bottomNavigationBar: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -43,16 +42,14 @@ class RegisterScreen extends StatelessWidget {
 
   Widget _buildLoginBody(BuildContext context) {
     var cubit = context.read<AuthCubit>();
-    return BlocListener<AuthCubit,AuthState>(
+    return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthLoadingState) {
           showLoadingDialog(context);
-          
-        }else if(state is AuthSuccessState){
-          pop(context);
+        } else if (state is AuthSuccessState) {
+          goToBase(context, Routes.main);
           log("Registration Success");
-
-        }else if(state is AuthErrorState){
+        } else if (state is AuthErrorState) {
           pop(context);
           ShowErrorDialog(context, "Registeration Failed");
         }
@@ -74,7 +71,7 @@ class RegisterScreen extends StatelessWidget {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "name is required";
-                  }else{
+                  } else {
                     return null;
                   }
                 },
@@ -86,46 +83,38 @@ class RegisterScreen extends StatelessWidget {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "email is required";
-                  }else{
+                  } else {
                     return null;
                   }
                 },
               ),
               Gap(12),
-              CustomTextField(
+              PasswordTextField(
                 controller: cubit.passwordController,
                 hint: "Password",
-                suffixIcon: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [SvgPicture.asset(AppImages.eye)],
-                ),
+
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "password is required";                  
-                  }else{
+                    return "password is required";
+                  } else {
                     return null;
                   }
-                }
+                },
               ),
               Gap(12),
-              CustomTextField(
+              PasswordTextField(
                 controller: cubit.confirmpasswordController,
                 hint: "ConfirmPassword",
-                suffixIcon: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [SvgPicture.asset(AppImages.eye)],
-                ),
+
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "ConfirmPassword is required";                  
-                  }else{
+                    return "ConfirmPassword is required";
+                  } else {
                     return null;
                   }
-                }
+                },
               ),
-      
+
               Gap(30),
               MainButton(
                 text: "Resgister",

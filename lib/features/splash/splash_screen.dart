@@ -1,3 +1,4 @@
+import 'package:bookia/core/Services/local_helper.dart';
 import 'package:bookia/core/Utils/text_styles.dart';
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/routes/navigation.dart';
@@ -14,10 +15,15 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  @override
   void initState() {
+    var userData = SharedPref.getUserData();
+
     Future.delayed(const Duration(seconds: 3), () {
-      pushwithReplacement(context, Routes.welcome);
+      if (userData != null) {
+        pushwithReplacement(context, Routes.main);
+      } else {
+        pushwithReplacement(context, Routes.welcome);
+      }
     });
     super.initState();
   }

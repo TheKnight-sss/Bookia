@@ -13,4 +13,5 @@ class AppImages {
   static const String profile = 'assets/icons/Profile.svg';
   static const String solarCamera = 'assets/icons/solar_camera-broken.svg';
   static const String category = 'assets/icons/category.svg';
+  static const String search = 'assets/icons/search.svg';
 }

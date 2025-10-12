@@ -1,26 +1,26 @@
-import 'errors.dart';
+import 'data.dart';
 
 class AuthResponse {
-  List<dynamic>? data;
+  UserModel? data;
   String? message;
-  Errors? errors;
+  List<dynamic>? error;
   int? status;
 
-  AuthResponse({this.data, this.message, this.errors, this.status});
+  AuthResponse({this.data, this.message, this.error, this.status});
 
   factory AuthResponse.fromJson(Map<String, dynamic> json) => AuthResponse(
-    data: json['data'] as List<dynamic>?,
-    message: json['message'] as String?,
-    errors: json['errors'] == null
+    data: json['data'] == null
         ? null
-        : Errors.fromJson(json['errors'] as Map<String, dynamic>),
+        : UserModel.fromJson(json['data'] as Map<String, dynamic>),
+    message: json['message'] as String?,
+    error: json['error'] as List<dynamic>?,
     status: json['status'] as int?,
   );
 
   Map<String, dynamic> toJson() => {
-    'data': data,
+    'data': data?.toJson(),
     'message': message,
-    'errors': errors?.toJson(),
+    'error': error,
     'status': status,
   };
 }
