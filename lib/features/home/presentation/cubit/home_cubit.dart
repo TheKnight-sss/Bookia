@@ -15,20 +15,21 @@ class HomeCubit extends Cubit<HomeState> {
   getInitData() async {
     emit(HomeLoadingState());
 
-    var results = await Future.wait([HomeRepo.getSliders(),HomeRepo.getBestSeller()]);
+    var results = await Future.wait([
+      HomeRepo.getSliders(),
+      HomeRepo.getBestSeller(),
+    ]);
 
-    var sliderRequest =results[0] as SliderRespones?;
+    var sliderRequest = results[0] as SliderRespones?;
     var bestsellerReq = results[0] as BestSellerResponse?;
 
-    if(sliderRequest != null || bestsellerReq != null){
+    if (sliderRequest != null || bestsellerReq != null) {
       products = bestsellerReq?.data?.products ?? [];
-      sliders = sliderRequest?.data?.sliders??[];
+      sliders = sliderRequest?.data?.sliders ?? [];
       emit(HomeSuccessState());
-    }else{
+    } else {
       emit(HOmeErrorState());
     }
-
-    
   }
 
   getBestSeller() async {

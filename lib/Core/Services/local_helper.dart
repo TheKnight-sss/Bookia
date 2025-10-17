@@ -34,7 +34,7 @@ class SharedPref {
     saveData(kuserData, jsonToString);
   }
 
-  static getUserData() {
+  static UserModel? getUserData() {
     String? stringdata = getData(kuserData);
 
     if (stringdata == null) return null;

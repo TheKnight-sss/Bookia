@@ -7,9 +7,9 @@ import 'package:gap/gap.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeSlider extends StatefulWidget {
-   const HomeSlider({super.key, required this.sliders,});
+  const HomeSlider({super.key, required this.sliders});
 
-   final List<SliderModel> sliders;
+  final List<SliderModel> sliders;
 
   @override
   State<HomeSlider> createState() => _HomeSliderState();
@@ -28,7 +28,7 @@ class _HomeSliderState extends State<HomeSlider> {
                 return ClipRRect(
                   borderRadius: BorderRadiusGeometry.circular(10),
                   child: CachedNetworkImage(
-                    imageUrl: widget.sliders[itemIndex].image?? '',
+                    imageUrl: widget.sliders[itemIndex].image ?? '',
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),

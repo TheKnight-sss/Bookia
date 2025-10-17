@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
       bottomNavigationBar: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Don\'t have an Account?"),
+          Text("Don't have an Account?"),
           TextButton(
             onPressed: () {
               goToBase(context, Routes.register);

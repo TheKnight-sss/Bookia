@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AppBarWithBack extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarWithBack({super.key});
+  const AppBarWithBack({super.key, this.action});
+
+  final List<Widget>? action;
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +19,10 @@ class AppBarWithBack extends StatelessWidget implements PreferredSizeWidget {
           pop(context);
         },
       ),
+      actions: action,
     );
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }

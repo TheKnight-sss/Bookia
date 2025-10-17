@@ -70,7 +70,7 @@ class TextStyles {
     return TextStyle(
       fontSize: fontSize,
       fontWeight: fontweight,
-      color: color ?? AppColor.greyColor,
+      color: color ?? AppColor.darkColor,
     );
   }
 }
