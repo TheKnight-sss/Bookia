@@ -7,6 +7,7 @@ class SharedPref {
   static late SharedPreferences pref;
 
   static const String kuserData = 'userData';
+  static const String kwishList = 'wishList';
 
   static init() async {
     pref = await SharedPreferences.getInstance();
@@ -42,6 +43,25 @@ class SharedPref {
     return UserModel.fromJson(stringjson);
   }
 
+  static saveWishList(List<int> wishListIds) {
+    List<String> listOfString = [];
+    for (var id in wishListIds) {
+      listOfString.add(id.toString());
+    }
+    saveData(kwishList, listOfString);
+  }
+
+  static List<int>? getWishList() {
+    List<String>? listOfString = getData(kwishList);
+
+    if (listOfString == null) return null;
+    List<int> wishListIds = [];
+    for (var id in listOfString) {
+      wishListIds.add(int.tryParse(id) ?? 0);
+    }
+    return wishListIds;
+  }
+
   static dynamic getData(String key) {
     return pref.get(key);
   }
@@ -49,36 +69,4 @@ class SharedPref {
   static remove(String key) async {
     await pref.remove(key);
   }
-
-  // setInt(String key, int val)async{
-  //   return pref.setInt(key, val);
-  // }
-
-  // int? getInt(String key){
-  //   return getInt(key);
-  // }
-
-  // setString(String key, String val)async{
-  //   return pref.setString(key, val);
-  // }
-
-  // String? getString(String key){
-  //   return getString(key);
-  // }
-
-  // setBool(String key, bool val)async{
-  //   return pref.setBool(key, val);
-  // }
-
-  // bool? getBool(bool key){
-  //   return getBool(key);
-  // }
-
-  // setDouble(String key, double val)async{
-  //   return pref.setDouble(key, val);
-  // }
-
-  // double? getDouble(String key){
-  //   return getDouble(key);
-  // }
 }

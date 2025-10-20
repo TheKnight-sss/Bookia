@@ -1,9 +1,11 @@
+import 'package:bookia/core/Services/local/local_helper.dart';
 import 'package:bookia/features/home/data/model/best_seller_response/best_seller_response.dart';
 import 'package:bookia/features/home/data/model/best_seller_response/product.dart';
 import 'package:bookia/features/home/data/model/slider_respones/slider.dart';
 import 'package:bookia/features/home/data/model/slider_respones/slider_respones.dart';
 import 'package:bookia/features/home/data/repo/home_repo.dart';
 import 'package:bookia/features/home/presentation/cubit/home_state.dart';
+import 'package:bookia/features/wishlist/data/repo/wishlist_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeCubit extends Cubit<HomeState> {
@@ -28,7 +30,7 @@ class HomeCubit extends Cubit<HomeState> {
       sliders = sliderRequest?.data?.sliders ?? [];
       emit(HomeSuccessState());
     } else {
-      emit(HOmeErrorState());
+      emit(HomeErrorState());
     }
   }
 
@@ -40,7 +42,7 @@ class HomeCubit extends Cubit<HomeState> {
       products = res.data!.products!;
       emit(HomeSuccessState());
     } else {
-      emit(HOmeErrorState());
+      emit(HomeErrorState());
     }
   }
 
@@ -52,7 +54,32 @@ class HomeCubit extends Cubit<HomeState> {
       sliders = res.data?.sliders ?? [];
       emit(HomeSuccessState());
     } else {
-      emit(HOmeErrorState());
+      emit(HomeErrorState());
     }
+  }
+
+  addRemoveToWishList({required int productId}) async {
+    emit(HomeLoadingState());
+    if (checkIfInWishList(productId)) {
+      var res = await WishlistRepo.removeFromWishList(productId: productId);
+      if (res != null) {
+        emit(HomeSuccessState(message: "Removed from wishlist"));
+      } else {
+        emit(HomeErrorState());
+      }
+    } else {
+      var res = await WishlistRepo.addToWishList(productId: productId);
+      if (res != null) {
+        emit(HomeSuccessState(message: "Added to wishlist"));
+      } else {
+        emit(HomeErrorState());
+      }
+    }
+  }
+
+  bool checkIfInWishList(int productId) {
+    var cachedWishList = SharedPref.getWishList();
+
+    return cachedWishList?.contains(productId) ?? false;
   }
 }

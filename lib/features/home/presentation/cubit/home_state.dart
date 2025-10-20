@@ -4,6 +4,9 @@ class HomeInitial extends HomeState {}
 
 class HomeLoadingState extends HomeState {}
 
-class HomeSuccessState extends HomeState {}
+class HomeSuccessState extends HomeState {
+  String? message;
+  HomeSuccessState({this.message});
+}
 
-class HOmeErrorState extends HomeState {}
+class HomeErrorState extends HomeState {}

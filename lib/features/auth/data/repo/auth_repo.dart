@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:bookia/core/Services/dio/api_endpoint.dart';
 import 'package:bookia/core/Services/dio/dio_provider.dart';
-import 'package:bookia/core/Services/local_helper.dart';
+import 'package:bookia/core/Services/local/local_helper.dart';
 import 'package:bookia/features/auth/data/models/auth_params.dart';
 import 'package:bookia/features/auth/data/models/auth_response/auth_response.dart';
 

@@ -1,3 +1,5 @@
+import 'package:bookia/features/home/data/model/best_seller_response/product.dart';
+
 class WishListProduct {
   int? id;
   String? name;
@@ -44,4 +46,18 @@ class WishListProduct {
     'description': description,
     'best_seller': bestSeller,
   };
+  Product maptoProduct(){
+    return Product(
+      id: id,
+      name: name,
+      price: price,
+      category: category,
+      image: image,
+      discount: discount,
+      stock: stock,
+      description: description,
+      bestSeller: bestSeller,
+      priceAfterDiscount: double.tryParse(price ?? '0') 
+    );
+  }
 }
