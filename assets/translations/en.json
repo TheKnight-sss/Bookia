@@ -1,0 +1,20 @@
+{
+    "app_title": "Bookia",
+    "welcome_message": "Welcome to Bookia App",
+    "Best_Seller": "Best Seller",
+    "home": "Home",
+    "login_header": "Welcome back! Glad to see you, Again!",
+    "enter_email": "Email",
+    "enter_password": "Password",
+    "forgot_password": "Forgot Password?",
+    "login_button": "Login",
+    "no_account": "Don't have an account? ",
+    "sign_up": "Sign Up",
+    "profile": "Profile",
+    "my_orders": "My Orders",
+    "edit_profile":"Edit Profile",
+    "faq":"FAQ",
+    "contact_us":"Contact Us",
+    "privacy":"Privacy & Terms"
+
+}

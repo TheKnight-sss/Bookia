@@ -1,6 +1,7 @@
 import 'package:bookia/core/Utils/colors.dart';
 import 'package:bookia/core/Utils/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 enum Dialogs { error, success, warring }
 
@@ -30,8 +31,17 @@ showMyDialog(
 showLoadingDialog(BuildContext context) {
   showDialog(
     context: context,
+    barrierDismissible: false,
+    barrierColor: AppColor.darkColor.withValues(alpha: 7),
     builder: (context) {
-      return Center(child: CircularProgressIndicator());
+      return Center(
+        child: Lottie.asset(
+          "assets/images/Loading.json",
+          width: 180,
+          height: 180,
+          fit: BoxFit.contain,
+          repeat: true),
+      );
     },
   );
 }

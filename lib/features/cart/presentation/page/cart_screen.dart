@@ -1,54 +1,99 @@
+import 'package:bookia/Components/buttons/main_button.dart';
 import 'package:bookia/core/Utils/colors.dart';
 import 'package:bookia/core/Utils/text_styles.dart';
 import 'package:bookia/core/constants/app_images.dart';
-import 'package:bookia/features/wishlist/presentation/cubit/wishlist_cubit.dart';
-import 'package:bookia/features/wishlist/presentation/cubit/wishlist_state.dart';
-import 'package:bookia/features/wishlist/widgets/wish_list_card.dart';
+import 'package:bookia/core/routes/navigation.dart';
+import 'package:bookia/core/routes/routes.dart';
+import 'package:bookia/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:bookia/features/cart/presentation/cubit/cart_state.dart';
+import 'package:bookia/features/cart/widgets/cart_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-class WishlistScreen extends StatelessWidget {
-  const WishlistScreen({super.key});
+class CartScreen extends StatelessWidget {
+  const CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => WishlistCubit()..getWishList(),
+      create: (context) => CartCubit()..getCart(),
       child: Scaffold(
-        appBar: AppBar(title: Text("wishlist")),
-        body: BlocBuilder<WishlistCubit, WishlistState>(
+        appBar: AppBar(title: Text("Cart")),
+        body: BlocBuilder<CartCubit, CartState>(
           builder: (context, state) {
-            var cubit = context.read<WishlistCubit>();
-
+            var cubit = context.read<CartCubit>();
+            var books = cubit.cartResponse?.data?.cartItems ?? [];
+            if (state is! CartStateSuccessState) {
+              return Center(child: CircularProgressIndicator());
+            }
             //after success state
-            if (cubit.books.isEmpty) {
+            if (books.isEmpty) {
               return _emptyUI();
             }
-            return Skeletonizer(
-              enabled: state is! WishlistSuccessState,
-              child: ListView.separated(
-                padding: EdgeInsets.all(20),
-                itemCount: cubit.books.length,
-                separatorBuilder: (BuildContext context, int index) {
-                  return Divider();
-                },
-                itemBuilder: (BuildContext context, int index) {
-                  return WishListCard(
-                    book: cubit.books[index],
-                    onDelete: () {
-                      cubit.removeFromWishList(
-                        productId: cubit.books[index].id ?? 0,
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.separated(
+                    padding: EdgeInsets.all(20),
+                    itemCount: books.length,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return Divider();
+                    },
+                    itemBuilder: (BuildContext context, int index) {
+                      return CartCard(
+                        book: books[index],
+                        onDelete: () {
+                          cubit.removeFromCart(
+                            cartItemId: books[index].itemId ?? 0,
+                          );
+                        },
+                        onUpdate: (q) {
+                          cubit.updateCart(
+                            cartItemId: books[index].itemId ?? 0,
+                            quantity: q,
+                          );
+                        },
+                        onRefesh: () {
+                          cubit.getCart();
+                        },
                       );
                     },
-                    onRefesh: () {
-                      cubit.getWishList();
-                    },
-                  );
-                },
-              ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Total Price", style: TextStyles.styleSize18()),
+                          Text(
+                            "${cubit.cartResponse?.data?.total ?? 0}\$",
+                            style: TextStyles.styleSize18(
+                              fontweight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Gap(20),
+                      MainButton(
+                        text: 'CheckOut',
+                        onPressed: () {
+                          pushTo(
+                            context,
+                            Routes.placeOrder,
+                            extra: "${cubit.cartResponse?.data?.total ?? 0}",
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             );
           },
         ),
@@ -70,15 +115,15 @@ class WishlistScreen extends StatelessWidget {
             ),
           ),
           Gap(20),
-          Text("Your wishlist is empty", style: TextStyles.styleSize18()),
+          Text("Your Cart is empty", style: TextStyles.styleSize18()),
         ],
       ),
     );
   }
 }
 
-// class WishListCard extends StatelessWidget {
-//   const WishListCard({super.key, required this.book, required this.onDelete});
+// class CartCard extends StatelessWidget {
+//   const CartCard({super.key, required this.book, required this.onDelete});
 
 //   final WishListProduct book;
 //   final Function() onDelete;

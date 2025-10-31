@@ -33,9 +33,33 @@ class AuthRepo {
       data: params.toJson(),
     );
     if (res.statusCode == 200) {
-      // Succsess
+      var body = res.data;
+      var userObj = AuthResponse.fromJson(body);
+      SharedPref.saveUserData(userObj.data);
+      return userObj;
     } else {
       // error
+    }
+    return null;
+  }
+
+  static Future<AuthResponse?> logout() async {
+    try {
+      var res = await DioProvider.post(
+        endpoint: ApiEndPoint.logout,
+        headers: {"Authorization": "Bearer ${SharedPref.getUserData()?.token}"},
+      );
+
+      if (res.statusCode == 200) {
+        var body = res.data;
+
+        return AuthResponse.fromJson(body);
+      } else {
+        return null;
+      }
+    } on Exception catch (e) {
+      log(e.toString());
+      return null;
     }
   }
 }

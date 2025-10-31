@@ -1,0 +1,20 @@
+{
+    "app_title": "بوكيا",
+    "welcome_message": "مرحبًا بك في تطبيق بوكيا",
+    "Best_Seller": "الأكثر مبيعًا",
+    "home": "الرئيسية",
+    "login_header": "أهلا بك مرة أخرى!",
+    "enter_email": "أدخل بريدك الإلكتروني",
+    "enter_password": "أدخل كلمة المرور",
+    "forgot_password": "نسيت كلمة المرور؟",
+    "login_button": "تسجيل الدخول",
+    "no_account": "لا تملك حساب؟ ",
+    "sign_up": "إنشاء حساب",
+    "profile": "الملف الشخصي",
+    "my_orders": "طلباتي",
+    "edit_profile":"تعديل الملف الشخصي",
+    "faq":"الأسئلة الشائعة",
+    "contact_us":"اتصل بنا",
+    "privacy":"الخصوصية والشروط"
+}
+    

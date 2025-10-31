@@ -23,26 +23,16 @@ class DetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = context.read<HomeCubit>();
     return BlocConsumer<HomeCubit, HomeState>(
-      
-        listener: (context, state) {
-              if (state is HomeLoadingState) {
-                showLoadingDialog(context);
-              } else if (state is HomeSuccessState) {
-                pop(context);
-                showMyDialog(
-                  context,
-                  state.message ?? '',
-                  type: Dialogs.success,
-                );
-              } else if (state is HomeErrorState) {
-                pop(context);
-                showMyDialog(
-                  context,
-                  'Something went wrong',
-                  type: Dialogs.error,
-                );
-              }
-            
+      listener: (context, state) {
+        if (state is HomeLoadingState) {
+          showLoadingDialog(context);
+        } else if (state is HomeSuccessState) {
+          pop(context);
+          showMyDialog(context, state.message ?? '', type: Dialogs.success);
+        } else if (state is HomeErrorState) {
+          pop(context);
+          showMyDialog(context, 'Something went wrong', type: Dialogs.error);
+        }
       },
       builder: (context, state) {
         return Scaffold(
@@ -50,9 +40,7 @@ class DetailsScreen extends StatelessWidget {
             action: [
               IconButton(
                 onPressed: () {
-                  context.read<HomeCubit>().addRemoveToWishList(
-                    productId: book.id ?? 0,
-                  );
+                  cubit.addRemoveToWishList(productId: book.id ?? 0);
                 },
                 icon: cubit.checkIfInWishList(book.id ?? 0)
                     ? SvgPicture.asset(
@@ -66,7 +54,7 @@ class DetailsScreen extends StatelessWidget {
               ),
             ],
           ),
-          body: SafeArea(            
+          body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: SingleChildScrollView(
@@ -131,9 +119,7 @@ class DetailsScreen extends StatelessWidget {
                     child: MainButton(
                       text: "Add To Cart",
                       onPressed: () {
-                        context.read<HomeCubit>().addRemoveToWishList(
-                          productId: book.id ?? 0,
-                        );
+                        cubit.addToCart(productId: book.id ?? 0);
                       },
                       bgColor: AppColor.darkColor,
                     ),

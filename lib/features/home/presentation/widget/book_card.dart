@@ -16,64 +16,76 @@ class BookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        pushTo(context, Routes.details, extra: book);
-      },
-      child: Container(
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: AppColor.accentColor,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Hero(
-                tag: book.id ?? "",
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: CachedNetworkImage(
-                    imageUrl: book.image ?? '',
-                    width: double.infinity,
-                    placeholder: (context, url) =>
-                        Center(child: CircularProgressIndicator()),
-                    fit: BoxFit.cover,
-                    errorWidget: (context, url, StackTrace) {
-                      return Image.asset(
-                        AppImages.welcome,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      );
-                    },
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: GestureDetector(
+        onTap: () {
+          pushTo(context, Routes.details, extra: book);
+        },
+        child: Container(
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: AppColor.accentColor,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Hero(
+                  tag: book.id ?? "",
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CachedNetworkImage(
+                      imageUrl: book.image ?? '',
+                      width: double.infinity,
+                      placeholder: (context, url) =>
+                          Center(child: CircularProgressIndicator()),
+                      fit: BoxFit.cover,
+                      errorWidget: (context, url, StackTrace) {
+                        return Image.asset(
+                          AppImages.welcome,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
-            ),
-            Gap(10),
-            SizedBox(
-              height: 45,
-              child: Text(book.name ?? '', style: TextStyles.styleSize16()),
-            ),
-            Gap(5),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "\$${book.priceAfterDiscount}",
+              Gap(10),
+              SizedBox(
+                height: 45,
+                child: Text(
+                  book.name ?? '',
                   style: TextStyles.styleSize16(),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
                 ),
-                MainButton(
-                  text: "Buy",
-                  onPressed: () {},
-                  width: 82,
-                  height: 30,
-                  bgColor: AppColor.darkColor,
-                ),
-              ],
-            ),
-          ],
+              ),
+              Gap(5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: Text(
+                      "\$${book.priceAfterDiscount}",
+                      style: TextStyles.styleSize16(),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ),
+                  MainButton(
+                    text: "Buy",
+                    onPressed: () {},
+                    width: 82,
+                    height: 30,
+                    bgColor: AppColor.darkColor,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:bookia/core/Services/local/local_helper.dart';
+import 'package:bookia/features/cart/data/repo/cart_repo.dart';
 import 'package:bookia/features/home/data/model/best_seller_response/best_seller_response.dart';
 import 'package:bookia/features/home/data/model/best_seller_response/product.dart';
 import 'package:bookia/features/home/data/model/slider_respones/slider.dart';
@@ -74,6 +75,17 @@ class HomeCubit extends Cubit<HomeState> {
       } else {
         emit(HomeErrorState());
       }
+    }
+  }
+
+  addToCart({required int productId}) async {
+    emit(HomeLoadingState());
+
+    var res = await CartRepo.addToCart(productId: productId);
+    if (res != null) {
+      emit(HomeSuccessState(message: "Added to cart"));
+    } else {
+      emit(HomeErrorState());
     }
   }
 

@@ -23,17 +23,18 @@ class WishListProduct {
     this.bestSeller,
   });
 
-  factory WishListProduct.fromJson(Map<String, dynamic> json) => WishListProduct(
-    id: json['id'] as int?,
-    name: json['name'] as String?,
-    price: json['price'] as String?,
-    category: json['category'] as String?,
-    image: json['image'] as String?,
-    discount: json['discount'] as int?,
-    stock: json['stock'] as int?,
-    description: json['description'] as String?,
-    bestSeller: json['best_seller'] as int?,
-  );
+  factory WishListProduct.fromJson(Map<String, dynamic> json) =>
+      WishListProduct(
+        id: json['id'] as int?,
+        name: json['name'] as String?,
+        price: json['price'] as String?,
+        category: json['category'] as String?,
+        image: json['image'] as String?,
+        discount: json['discount'] as int?,
+        stock: json['stock'] as int?,
+        description: json['description'] as String?,
+        bestSeller: json['best_seller'] as int?,
+      );
 
   Map<String, dynamic> toJson() => {
     'id': id,
@@ -46,7 +47,7 @@ class WishListProduct {
     'description': description,
     'best_seller': bestSeller,
   };
-  Product maptoProduct(){
+  Product maptoProduct() {
     return Product(
       id: id,
       name: name,
@@ -57,7 +58,7 @@ class WishListProduct {
       stock: stock,
       description: description,
       bestSeller: bestSeller,
-      priceAfterDiscount: double.tryParse(price ?? '0') 
+      priceAfterDiscount: double.tryParse(price ?? '0'),
     );
   }
 }

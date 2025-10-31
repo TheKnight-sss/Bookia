@@ -6,7 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class WishlistCubit extends Cubit<WishlistState> {
   WishlistCubit() : super(WishlistInitialState());
 
-  List<WishListProduct> books = [];
+  List<WishListProduct> books = [
+    WishListProduct(),
+    WishListProduct(),
+    WishListProduct(),
+    WishListProduct(),
+  ];
 
   getWishList() async {
     emit(WishlistLoadingState());
